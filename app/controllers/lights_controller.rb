@@ -1,5 +1,7 @@
 class LightsController < ApplicationController
   before_action :set_light, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:index, :show]
+  before_action :correct_user, only: [:edit, :update, :destroy]
 
   # GET /lights
   # GET /lights.json
@@ -14,7 +16,8 @@ class LightsController < ApplicationController
 
   # GET /lights/new
   def new
-    @light = Light.new
+    @light = current_user.lights.build
+
   end
 
   # GET /lights/1/edit
@@ -24,7 +27,7 @@ class LightsController < ApplicationController
   # POST /lights
   # POST /lights.json
   def create
-    @light = Light.new(light_params)
+    @light = current_user.lights.build (light_params)
 
     respond_to do |format|
       if @light.save
@@ -71,4 +74,10 @@ class LightsController < ApplicationController
     def light_params
       params.require(:light).permit(:description)
     end
+  def correct_user
+    @light = current_user.lights.find_by(id: params[:id])
+    redirect_to lights_path, notice: "Not authorised to edit this light" if @light.nil?
+  end
+
+
 end

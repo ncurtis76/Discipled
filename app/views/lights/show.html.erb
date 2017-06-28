@@ -4,6 +4,8 @@
   <strong>Description:</strong>
   <%= @light.description %>
 </p>
-
-<%= link_to 'Edit', edit_light_path(@light) %> |
+<% if @light.user == current_user %>
+<%= link_to 'Edit', edit_light_path(@light) %> 
+<% end %>
 <%= link_to 'Back', lights_path %>
+
