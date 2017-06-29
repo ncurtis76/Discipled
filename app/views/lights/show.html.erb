@@ -1,9 +1,10 @@
 <p id="notice"><%= notice %></p>
-
-<p>
+<%= image_tag @light.image.url(:medium) %>
+<br>
   <strong>Description:</strong>
-  <%= @light.description %>
-</p>
+</br>
+  <p><%= @light.description %></p>
+  
 <% if @light.user == current_user %>
 <%= link_to 'Edit', edit_light_path(@light) %> 
 <% end %>

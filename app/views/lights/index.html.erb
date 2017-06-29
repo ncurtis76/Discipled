@@ -13,7 +13,9 @@
   <tbody>
     <% @lights.each do |light| %>
       <tr>
+        <td><%= image_tag light.image.url(:medium) %></td>
         <td><%= light.description %></td>
+        
         <td><%= link_to 'Show', light %></td>
         <% if light.user == current_user %>
         <td><%= link_to 'Edit', edit_light_path(light) %></td>

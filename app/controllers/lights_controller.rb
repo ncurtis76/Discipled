@@ -72,7 +72,7 @@ class LightsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def light_params
-      params.require(:light).permit(:description)
+      params.require(:light).permit(:description, :image)
     end
   def correct_user
     @light = current_user.lights.find_by(id: params[:id])
